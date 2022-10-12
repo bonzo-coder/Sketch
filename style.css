@@ -1,11 +1,21 @@
 body {
-    
+    text-align: center;
+    margin: 40px;
+}
+
+#welcomeBox {
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#messageBox {
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #mainFlex {
     display: flex;
-    flex-direction: column;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
 }
 
 #mainWindow {
@@ -15,14 +25,34 @@ body {
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    border: 5px solid black;
+    border: 30px solid gray;
+    border-radius: 50px;
 }
 
 .boxes {
     display: block;
     width: 20px;
     height: 20px;
-    border: 1px solid lightgray;
-    
-    
+    border: 1px solid aliceblue; 
+    background-color: white; 
+}
+
+#box1, #box16, #box241, #box256 {
+    border: none;
+}
+#box1 {
+    border-top-left-radius: 20px;
+}
+#box16 {
+    border-top-right-radius: 20px;
+}
+#box241 {
+    border-bottom-left-radius: 20px;
+}
+#box256 {
+    border-bottom-right-radius: 20px;
+}
+
+.boxes:hover {
+    background-color: yellow;
 }

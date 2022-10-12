@@ -1,5 +1,5 @@
 let i=0;
-let boxes="1";
+
 
 function drawPage () {
     let welcomeBox = document.createElement('h1');
@@ -24,26 +24,13 @@ function drawGrid () {
         let div = document.createElement('div');
          div.id=`box${i+1}`;
          div.className='boxes';
-         div.innerHTML = '.';
+         div.innerHTML = '';
          mainWindow.appendChild(div);
          };
 }
 
 drawPage();
-console.log(typeof boxes);
 
-function changeColor () {
-   boxes = document.getElementById(`box${i+1}`);
-   console.log(typeof boxes);
-   if (boxes){
-    console.log('jest ok')
-    boxes.classList.add('colored');
-   } 
-   console.log('jestem za daleko');  
-}
 
-addEventListener('mouseover',changeColor());
-   changeColor();
-   console.log(typeof boxes);
 
 
