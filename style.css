@@ -3,6 +3,10 @@ body {
     margin: 40px;
 }
 
+#pageBox {
+margin: auto;
+}
+
 #welcomeBox {
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -13,20 +17,21 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
 
 #mainFlex {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 60px;
 }
 
 #mainWindow {
-    width: 352px;
-    height: 352px;
+    width: 400px;
+    height: 400px;
     display: flex;
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
     border: 30px solid gray;
-    border-radius: 50px;
+    background-color: gray;
 }
 
 .boxes {
@@ -37,22 +42,24 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     background-color: white; 
 }
 
-#box1, #box16, #box241, #box256 {
-    border: none;
-}
-#box1 {
-    border-top-left-radius: 20px;
-}
-#box16 {
-    border-top-right-radius: 20px;
-}
-#box241 {
-    border-bottom-left-radius: 20px;
-}
-#box256 {
-    border-bottom-right-radius: 20px;
+.colored {
+    background-color: yellow;
 }
 
-.boxes:hover {
-    background-color: yellow;
+#divUnderGrid {
+    display: flex;
+    justify-content: center;
+}
+
+#buttonChoose, #buttonReset {
+    margin: 20px;
+    background-color:rgb(202, 201, 201); 
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; 
+    border: 2px solid rgb(140, 117, 196);
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
