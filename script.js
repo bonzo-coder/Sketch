@@ -130,9 +130,9 @@ function chooseGrid () {
     });
 }
 
-function buttonChoose () {
+//function buttonChoose () {
     
-}
+//}
 
 window.onload = drawPage(16);
 
