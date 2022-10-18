@@ -36,6 +36,7 @@ function drawPage (s,i) {
     pageBox.appendChild(welcomeBox);
     pageBox.appendChild(messageBox);
     pageBox.appendChild(mainFlex);
+    btnColorMixer.style.backgroundColor="gray"; //this fixes red randomize button / still no hover
     buttonReset.addEventListener('click', ()=> drawInitialGrid());
     /*btnColorMixer.addEventListener('click',()=> {
         normalMode = !normalMode;
@@ -66,9 +67,9 @@ function drawPage (s,i) {
 function colorMix () {
     btnColorMixer.addEventListener('click',()=> {
         normalMode = !normalMode;
-        if (!normalMode) {
+        if (!normalMode) {//jak zamiast pagebox dodam document.body to nie dziala wylaczenie....
             pageBox.style.animation= "mymove 0.6s infinite";
-            welcomeBox.style.fontSize="40px";
+            welcomeBox.style.fontSize="32px";
             welcomeBox.innerHTML=`<font color="#FF2626">A</font>
             <font color="#8f34eb">C</font>
             <font color="#28f766">I</font>
@@ -77,11 +78,23 @@ function colorMix () {
             <font color="#28f766">O</font>
             <font color="#8f34eb">D</font>
             <font color="#FF2626">E</font>`;
-            messageBox.textContent='LET SOME COLORS IN YOUR LIFE'
-            
+            messageBox.textContent='LET SOME COLORS IN YOUR LIFE';
+            btnColorMixer.style.backgroundColor="red";
+            btnColorMixer.textContent='ESCAPE';
+            mainFlex.style.backgroundColor="blue";
+            mainFlex.style.border='22px double red';
+            mainWindow.style.border='22px solid #f7b928';
+            mainWindow.style.backgroundColor='#f7b928';
+
         }else{pageBox.style.animation= "";
             welcomeBox.textContent=`Notebook`;
-            messageBox.textContent='Feel free to draw in the grid below'
+            messageBox.textContent='Feel free to draw in the grid below';
+            btnColorMixer.style.backgroundColor="gray";
+            btnColorMixer.textContent='Again?'; //hoover nie dziala!! i po reset zostaje czerwony
+            mainFlex.style.backgroundColor="";
+            mainFlex.style.border='';
+            mainWindow.style.border='22px solid gray';
+            mainWindow.style.backgroundColor='gray';
         };
     });
 }

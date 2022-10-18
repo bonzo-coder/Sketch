@@ -9,6 +9,8 @@ margin: auto;
 
 #welcomeBox {
 font-family: Courier, monospace;
+padding-top: 40px;
+font-size: 32px;
 }
 
 #messageBox {
@@ -21,7 +23,7 @@ font-weight:500;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    padding: 10px;
 }
 
 #mainWindow {
@@ -33,7 +35,6 @@ font-weight:500;
     flex-wrap: wrap;
     border: 22px solid gray;
     background-color: gray;
-    
 }
 
 .boxes {
@@ -58,12 +59,12 @@ font-weight:500;
     background-color:gray; 
     color: white;
     border-radius: 15px;
-    padding: 10px 10px;
+    padding: 2px 2px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 12px; 
-    border: 2px solid black;
+    border: 3px solid black;
     font-family: Courier, monospace;
     -webkit-transition: background-color 1s ease-out;
     -moz-transition: background-color 1s ease-out;
@@ -71,8 +72,12 @@ font-weight:500;
     transition: background-color 1s ease-out;
 }
 
+#buttonChoose, #buttonReset, #colorMixer {
+    padding: 5px 8px;
+}
+
 #buttonChoose:hover, #buttonReset:hover, #colorMixer:hover, #colorInput:hover  {
-    background-color: rgb(236, 207, 60);
+    background-color: rgb(236, 207, 60) !important;
     color: black;
     cursor: pointer;
   }
@@ -81,3 +86,4 @@ font-weight:500;
     from {background-color: black;}
     to {background-color: white;}
   }
+
