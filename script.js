@@ -13,7 +13,7 @@ function drawPage (s,i) {
     let pageBox = document.createElement('div');
     let welcomeBox = document.createElement('h1');
     let messageBox = document.createElement('h2');
-    welcomeBox.textContent='NoteBook';
+    welcomeBox.textContent=`Notebook`;
     messageBox.textContent='Feel free to draw in the grid below'
     pageBox.id='pageBox';
     welcomeBox.id='welcomeBox';
@@ -37,13 +37,10 @@ function drawPage (s,i) {
     pageBox.appendChild(messageBox);
     pageBox.appendChild(mainFlex);
     buttonReset.addEventListener('click', ()=> drawInitialGrid());
+    btnColorMixer.addEventListener('click',()=> normalMode = !normalMode);
     drawGrid(s,i);
     //chooseGrid();
-    btnColorMixer.addEventListener('click',()=>{
-        normalMode = !normalMode;
-    });
-    
-    colorDraw = 'black';
+    colorInput.value = 'black';
 }
 
 /*function colorMix(i) {
@@ -63,7 +60,6 @@ function drawPage (s,i) {
 }*/
 
 function drawGrid (s,i) {
-    console.log(s);
     mainWindow = document.createElement('div');
     mainWindow.id='mainWindow';
     mainFlex.appendChild(mainWindow);
@@ -81,7 +77,7 @@ function drawGrid (s,i) {
          div.innerHTML = '';
          div.style.width=`${(400-2*s)/s}px`;
          div.style.height=`${(400-2*s)/s}px`;
-         colorArray[i]='#'+Math.floor(Math.random()*16777215).toString(16);
+         colorArray[i]='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
          div.addEventListener('mouseover',() => 
          {	
             //function colorMix(i) {
@@ -94,7 +90,7 @@ function drawGrid (s,i) {
                         colorDraw = colorInput.value;
                         document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
                     }else if (!normalMode){
-                        colorDraw =  colorArray[i-1];
+                        colorDraw =  colorArray[i];
                         console.log(colorArray[i]);
                         document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
                     }
@@ -147,16 +143,19 @@ function drawGrid (s,i) {
             bottomRight.style.borderBottomRightRadius=`${(400-2*s)/s}px`;
         }
         else {
-           
         }
-         console.log(colorArray);
-        
    // chooseGrid();
 }
 
 function drawInitialGrid () {
+    normalMode = true;
+    s=16;
     cleanGrid();
-    drawPage(16);
+    drawPage(s);
+    //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
+    btnColorMixer.addEventListener('click',()=>{
+        normalMode = !normalMode;
+    });
 }
 
 function cleanGrid () {
@@ -171,18 +170,17 @@ function cleanGrid () {
             i=0;
             cleanGrid();
             drawPage(s,i);
+             //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
+            btnColorMixer.addEventListener('click',()=>{
+                normalMode = !normalMode;
+            });
         }
         else { 
             alert('Try again. Type an integer from 1 to 100');
             drawInitialGrid();
         }
     });
-//}
-
 //function buttonChoose () {
-    
-//}
-
 window.onload = drawPage(16);
 
 
