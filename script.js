@@ -37,10 +37,53 @@ function drawPage (s,i) {
     pageBox.appendChild(messageBox);
     pageBox.appendChild(mainFlex);
     buttonReset.addEventListener('click', ()=> drawInitialGrid());
-    btnColorMixer.addEventListener('click',()=> normalMode = !normalMode);
+    /*btnColorMixer.addEventListener('click',()=> {
+        normalMode = !normalMode;
+        if (!normalMode) {
+            pageBox.style.animation= "mymove 0.6s infinite";
+            welcomeBox.style.fontSize="40px";
+            welcomeBox.innerHTML=`<font color="#FF2626">A</font>
+            <font color="#8f34eb">C</font>
+            <font color="#28f766">I</font>
+            <font color="#FFD523">D&nbsp;&nbsp;</font>
+            <font color="#FFD523">M</font>
+            <font color="#28f766">O</font>
+            <font color="#8f34eb">D</font>
+            <font color="#FF2626">E</font>`;
+            messageBox.textContent='LET SOME COLORS IN YOUR LIFE'
+            
+        }else{pageBox.style.animation= "";
+            welcomeBox.textContent=`Notebook`;
+            messageBox.textContent='Feel free to draw in the grid below'
+        };
+    });*/
+    colorMix();
     drawGrid(s,i);
     //chooseGrid();
     colorInput.value = 'black';
+}
+
+function colorMix () {
+    btnColorMixer.addEventListener('click',()=> {
+        normalMode = !normalMode;
+        if (!normalMode) {
+            pageBox.style.animation= "mymove 0.6s infinite";
+            welcomeBox.style.fontSize="40px";
+            welcomeBox.innerHTML=`<font color="#FF2626">A</font>
+            <font color="#8f34eb">C</font>
+            <font color="#28f766">I</font>
+            <font color="#FFD523">D&nbsp;&nbsp;</font>
+            <font color="#FFD523">M</font>
+            <font color="#28f766">O</font>
+            <font color="#8f34eb">D</font>
+            <font color="#FF2626">E</font>`;
+            messageBox.textContent='LET SOME COLORS IN YOUR LIFE'
+            
+        }else{pageBox.style.animation= "";
+            welcomeBox.textContent=`Notebook`;
+            messageBox.textContent='Feel free to draw in the grid below'
+        };
+    });
 }
 
 /*function colorMix(i) {
@@ -81,7 +124,6 @@ function drawGrid (s,i) {
          div.addEventListener('mouseover',() => 
          {	
             //function colorMix(i) {
-                console.log(normalMode);
                 colorInput.addEventListener('change',()=>{
                 colorDraw = colorInput.value;
                 });
@@ -89,12 +131,11 @@ function drawGrid (s,i) {
                     if(normalMode) {
                         colorDraw = colorInput.value;
                         document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
-                    }else if (!normalMode){
+                    }else {
                         colorDraw =  colorArray[i];
-                        console.log(colorArray[i]);
                         document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
                     }
-                    else {console.log(normalMode); }
+                   
                   //  });
            // }
            // document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
@@ -153,9 +194,10 @@ function drawInitialGrid () {
     cleanGrid();
     drawPage(s);
     //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
-    btnColorMixer.addEventListener('click',()=>{
+    /*btnColorMixer.addEventListener('click',()=>{
         normalMode = !normalMode;
-    });
+    });*/
+    colorMix();
 }
 
 function cleanGrid () {
@@ -168,12 +210,14 @@ function cleanGrid () {
         s = parseInt(prompt("Grid size: Type a number from 1 to 100"));
         if (s>0 && s<101) {
             i=0;
+            normalMode = true;
             cleanGrid();
             drawPage(s,i);
              //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
-            btnColorMixer.addEventListener('click',()=>{
+            /*btnColorMixer.addEventListener('click',()=>{
                 normalMode = !normalMode;
-            });
+            });*/
+            colorMix();
         }
         else { 
             alert('Try again. Type an integer from 1 to 100');
