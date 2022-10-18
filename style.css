@@ -51,7 +51,7 @@ font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida San
     justify-content: center;
 }
 
-#buttonChoose, #buttonReset {
+#buttonChoose, #buttonReset, #colorMixer, #colorInput {
     margin: 20px;
     background-color:rgb(202, 201, 201); 
     color: white;
