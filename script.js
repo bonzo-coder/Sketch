@@ -8,6 +8,9 @@ let buttonReset = document.createElement('button');
 let normalMode = true;
 let colorDraw;
 let colorArray;
+let boxArray=[];
+let noOfMouseovers=0;
+let brightValue;
 
 function drawPage (s,i) {
     let pageBox = document.createElement('div');
@@ -20,6 +23,7 @@ function drawPage (s,i) {
     messageBox.id='messageBox';
     mainFlex = document.createElement('div');
     mainFlex.id='mainFlex';
+    mainFlex.style.padding="32px";
     divUnderGrid.id='divUnderGrid';
     button.type='button';
     button.id='buttonChoose';
@@ -65,6 +69,7 @@ function drawPage (s,i) {
 }
 
 function colorMix () {
+    colorInput.style.visibility='visible'; // januszerka, zeby paleta kolorow wrocila
     btnColorMixer.addEventListener('click',()=> {
         normalMode = !normalMode;
         if (!normalMode) {//jak zamiast pagebox dodam document.body to nie dziala wylaczenie....
@@ -82,9 +87,12 @@ function colorMix () {
             btnColorMixer.style.backgroundColor="red";
             btnColorMixer.textContent='ESCAPE';
             mainFlex.style.backgroundColor="blue";
+            mainFlex.style.padding="10px";
             mainFlex.style.border='22px double red';
             mainWindow.style.border='22px solid #f7b928';
             mainWindow.style.backgroundColor='#f7b928';
+            colorInput.style.visibility='hidden'; // hidden bo w colormixie nie dziala paleta kolorów
+            
 
         }else{pageBox.style.animation= "";
             welcomeBox.textContent=`Notebook`;
@@ -93,8 +101,10 @@ function colorMix () {
             btnColorMixer.textContent='Again?'; //hoover nie dziala!! i po reset zostaje czerwony
             mainFlex.style.backgroundColor="";
             mainFlex.style.border='';
+            mainFlex.style.padding="32px";
             mainWindow.style.border='22px solid gray';
             mainWindow.style.backgroundColor='gray';
+            colorInput.style.visibility='visible';
         };
     });
 }
@@ -134,70 +144,122 @@ function drawGrid (s,i) {
          div.style.width=`${(400-2*s)/s}px`;
          div.style.height=`${(400-2*s)/s}px`;
          colorArray[i]='#'+Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
-         div.addEventListener('mouseover',() => 
-         {	
+         boxArray[i]='box'+(i+1);
+         div.addEventListener('mouseover',() => {	
             //function colorMix(i) {
-                colorInput.addEventListener('change',()=>{
+            colorInput.addEventListener('change',()=>{
+            colorDraw = colorInput.value;
+            });
+            //btnColorMixer.addEventListener('click', function() {
+            if(normalMode) {
                 colorDraw = colorInput.value;
+                document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
+            }else {
+                colorDraw =  colorArray[i];
+                colorInput.addEventListener('change',()=>{                 //not working - after mixer user cannot input color
+                    colorDraw = colorInput.value;
                 });
-                //btnColorMixer.addEventListener('click', function() {
-                    if(normalMode) {
-                        colorDraw = colorInput.value;
-                        document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
-                    }else {
-                        colorDraw =  colorArray[i];
-                        document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
-                    }
-                   
-                  //  });
+                document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
+                               /* for (let j=0; j<7; j++){
+                                    document.getElementById(`box${i+1}`).addEventListener(
+                                        "mouseover", (e)=> {
+                                    let brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1]
+                                    document.getElementById(`box${i+1}`).style.filter =`brightness(${1.5-0.3*e})`;// `brightness(${brightArr[j]})`;
+                                    console.log(brightArr[j]);        
+                            });
+                        }*/
+            }
+                   // });
            // }
            // document.getElementById(`box${i+1}`).style.backgroundColor = colorDraw;
          });
          mainWindow.appendChild(div);
-         };
-         
-         if (s<5) {
-            let mainRadius = document.getElementById('mainWindow');
-            mainRadius.style.borderRadius = `30px`;
+    }
+        /*boxArray.forEach(Document.getElementById(`${boxArray}`),() => {
+            document.getElementById(`box${i+1}`).addEventListener(
+                "mouseover", (e)=> {
+            let brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1]
+            document.getElementById(`box${i+1}`).style.filter =`brightness(${1.5-0.3*e})`;// `brightness(${brightArr[j]})`;
+            console.log(brightArr[j]);
+        });*/
+        
+        //czy to musi tu byc?? to nizej
+    boxArray.forEach(element => {
+        let e=0;
+        document.getElementById(`${element}`).addEventListener("mouseover", ()=> {
+            if (e<8){
+                brightValue =  document.getElementById(`${element}`).value=e;
+                brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1, 0]
+                let brightChoose = brightArr[brightValue];
+                e = e+1;
+                    //noOfMouseovers += 1;
+                //brightValue = brightValue - 0.3;
+                document.getElementById(`${element}`).style.filter =`brightness(${brightChoose})`;
+                //document.getElementById(`${element}`).style.filter =`blur(3px)`; //blur strasznie wolny w colormix
+            } else {};
+        });
+    });
+        
+     /*   for (let j=0; j<7; j++){
+            let divos =[...document.querySelectorAll(`[id="box"]`)].addEventListener("mouseover", ()=> {
+            let brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1]
+            divos.style.filter = `brightness(${brightArr[j]})`;
+            console.log(brightArr[j]);
+    });
+}*/
+        /*for (let j=0; j<7; j++){
+            document.querySelectorAll('div.boxes').addEventListener("mouseover", ()=> {
+            let brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1]
+            div.style.filter =/*`brightness(${1.5-0.3*e})`; `brightness(${brightArr[j]})`;
+            console.log(brightArr[j]); 
+    });*/ 
+         /*div.addEventListener('mouseover',() => {
+            for (let j=0; j<7; j++){
+                let brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1]
+                document.getElementById(`box${i+1}`).style.filter = `brightness(0.3)`;
+                console.log(brightArr[j]);
+            };
+        });*/
 
-            let idTopLeft = `box1`;
-            let topLeft = document.getElementById(idTopLeft);
-            topLeft.style.borderTopLeftRadius=`30px`;
+    if (s<5) {
+        let mainRadius = document.getElementById('mainWindow');
+        mainRadius.style.borderRadius = `30px`;
 
-            let idTopRight = `box${s}`;
-            let topRight = document.getElementById(idTopRight);
-            topRight.style.borderTopRightRadius=`30px`;
+        let idTopLeft = `box1`;
+        let topLeft = document.getElementById(idTopLeft);
+        topLeft.style.borderTopLeftRadius=`30px`;
 
-            let idBottomLeft = `box${s*(s-1)+1}`;
-            let bottomLeft = document.getElementById(idBottomLeft);
-            bottomLeft.style.borderBottomLeftRadius=`30px`;
+        let idTopRight = `box${s}`;
+        let topRight = document.getElementById(idTopRight);
+        topRight.style.borderTopRightRadius=`30px`;
 
-            let idBottomRight = `box${s*s}`;
-            let bottomRight = document.getElementById(idBottomRight);
-            bottomRight.style.borderBottomRightRadius=`30px`;
-        }
-         else if (s>0) {
-            let mainRadius = document.getElementById('mainWindow');
-            mainRadius.style.borderRadius = `${(400-2*s)/s}px`;
+        let idBottomLeft = `box${s*(s-1)+1}`;
+        let bottomLeft = document.getElementById(idBottomLeft);
+        bottomLeft.style.borderBottomLeftRadius=`30px`;
 
-            let idTopLeft = `box1`;
-            let topLeft = document.getElementById(idTopLeft);
-            topLeft.style.borderTopLeftRadius=`${(400-2*s)/s}px`;
+        let idBottomRight = `box${s*s}`;
+        let bottomRight = document.getElementById(idBottomRight);
+        bottomRight.style.borderBottomRightRadius=`30px`;
+    }else if (s>0) {
+        let mainRadius = document.getElementById('mainWindow');
+        mainRadius.style.borderRadius = `${(400-2*s)/s}px`;
 
-            let idTopRight = `box${s}`;
-            let topRight = document.getElementById(idTopRight);
-            topRight.style.borderTopRightRadius=`${(400-2*s)/s}px`;
+        let idTopLeft = `box1`;
+        let topLeft = document.getElementById(idTopLeft);
+        topLeft.style.borderTopLeftRadius=`${(400-2*s)/s}px`;
 
-            let idBottomLeft = `box${s*(s-1)+1}`;
-            let bottomLeft = document.getElementById(idBottomLeft);
-            bottomLeft.style.borderBottomLeftRadius=`${(400-2*s)/s}px`;
+        let idTopRight = `box${s}`;
+        let topRight = document.getElementById(idTopRight);
+        topRight.style.borderTopRightRadius=`${(400-2*s)/s}px`;
 
-            let idBottomRight = `box${s*s}`;
-            let bottomRight = document.getElementById(idBottomRight);
-            bottomRight.style.borderBottomRightRadius=`${(400-2*s)/s}px`;
-        }
-        else {
-        }
+        let idBottomLeft = `box${s*(s-1)+1}`;
+        let bottomLeft = document.getElementById(idBottomLeft);
+        bottomLeft.style.borderBottomLeftRadius=`${(400-2*s)/s}px`;
+
+        let idBottomRight = `box${s*s}`;
+        let bottomRight = document.getElementById(idBottomRight);
+        bottomRight.style.borderBottomRightRadius=`${(400-2*s)/s}px`;
+    }else {};
    // chooseGrid();
 }
 
@@ -211,19 +273,20 @@ function drawInitialGrid () {
         normalMode = !normalMode;
     });*/
     colorMix();
+    boxArray=[];
 }
 
 function cleanGrid () {
     let main = document.getElementById('pageBox');
     main.remove('pageBox');
 }
-
 //function chooseGrid () {
     button.addEventListener('click', function() {
         s = parseInt(prompt("Grid size: Type a number from 1 to 100"));
         if (s>0 && s<101) {
             i=0;
             normalMode = true;
+            boxArray=[];
             cleanGrid();
             drawPage(s,i);
              //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
