@@ -265,6 +265,7 @@ function drawGrid (s,i) {
 
 function drawInitialGrid () {
     normalMode = true;
+    colorInput.value = 'black'; //naprawia kolor po zmianie grid
     s=16;
     cleanGrid();
     drawPage(s);
@@ -287,6 +288,7 @@ function cleanGrid () {
             i=0;
             normalMode = true;
             boxArray=[];
+            colorInput.value = 'black';
             cleanGrid();
             drawPage(s,i);
              //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
