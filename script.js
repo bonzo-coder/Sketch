@@ -62,8 +62,9 @@ function drawPage (s,i) {
             messageBox.textContent='Feel free to draw in the grid below'
         };
     });*/
+    
+    drawGrid(s,i);  //bylo jeszcze "i"
     colorMix();
-    drawGrid(s,i);
     //chooseGrid();
     colorInput.value = 'black';
 }
@@ -265,8 +266,9 @@ function drawGrid (s,i) {
 
 function drawInitialGrid () {
     normalMode = true;
-    colorInput.value = 'black'; //naprawia kolor po zmianie grid
+    colorInput.value = '#000000'; //naprawia kolor po zmianie grid
     s=16;
+    boxArray=[];
     cleanGrid();
     drawPage(s);
     //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
@@ -274,7 +276,7 @@ function drawInitialGrid () {
         normalMode = !normalMode;
     });*/
     colorMix();
-    boxArray=[];
+    
 }
 
 function cleanGrid () {
@@ -288,7 +290,7 @@ function cleanGrid () {
             i=0;
             normalMode = true;
             boxArray=[];
-            colorInput.value = 'black';
+            colorInput.value = '#000000';
             cleanGrid();
             drawPage(s,i);
              //dlaczego tak to dziala?? dlaczego ten eventListener musi tu byc??
