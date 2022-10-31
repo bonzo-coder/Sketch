@@ -33,6 +33,7 @@ function drawPage (s,i) {
     buttonReset.textContent='Reset grid';
     colorInput.type='color';
     colorInput.id='colorInput';
+    colorInput.style.visibility='visible';
     btnColorMixer.type='button';
     btnColorMixer.id='colorMixer';
     btnColorMixer.textContent='Randomize'
@@ -70,7 +71,7 @@ function drawPage (s,i) {
 }
 
 function colorMix () {
-    colorInput.style.visibility='visible'; // januszerka, zeby paleta kolorow wrocila
+   
     btnColorMixer.addEventListener('click',()=> {
         normalMode = !normalMode;
         if (!normalMode) {//jak zamiast pagebox dodam document.body to nie dziala wylaczenie....
@@ -110,21 +111,7 @@ function colorMix () {
     });
 }
 
-/*function colorMix(i) {
-    console.log(normalMode);
-    colorInput.addEventListener('change',()=>{
-    colorDraw = colorInput.value;
-    });
-    btnColorMixer.addEventListener('click', function() {
-        if(normalMode) {
-            colorDraw = colorInput.value;
-        }else if (!normalMode){
-            colorDraw =  colorArray[i-1];
-            console.log(colorArray[i]);
-        }
-        else {console.log(normalMode); }
-        });
-}*/
+
 
 function drawGrid (s,i) {
     mainWindow = document.createElement('div');
@@ -202,7 +189,7 @@ function drawGrid (s,i) {
     });
         
      /*   for (let j=0; j<7; j++){
-            let divos =[...document.querySelectorAll(`[id="box"]`)].addEventListener("mouseover", ()=> {
+            let divos =[...document.querySelectorAll(`[id="box"]`)].addEventListener("mouseover", ()=> {  //powinno byc id*= spróbuj
             let brightArr = [1.5, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1]
             divos.style.filter = `brightness(${brightArr[j]})`;
             console.log(brightArr[j]);
